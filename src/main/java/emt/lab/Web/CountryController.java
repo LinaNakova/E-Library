@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/country")
+@RequestMapping("/api/countries")
 public class CountryController {
+
     private final CountryService countryService;
 
     public CountryController(CountryService countryService) {
@@ -18,7 +19,7 @@ public class CountryController {
     }
 
     @GetMapping("/all")
-    public List<Country> getAllCountries(){
+    public List<Country> getAllCountries() {
         return this.countryService.findAll();
     }
 }

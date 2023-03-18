@@ -34,9 +34,25 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void addBook(BookRequest bookRequest) {
-        List<Author> bookAuthors =  this.authorService.findByIds(bookRequest.authorIds);
-        Book book = new Book(bookRequest.name, Category.valueOf(bookRequest.category) , bookAuthors, bookRequest.availableCopies);
+        List<Author> bookAuthors = this.authorService.findByIds(bookRequest.authorIds);
+        Book book = new Book(bookRequest.name, Category.valueOf(bookRequest.category), bookAuthors, bookRequest.availableCopies);
         this.bookRepository.save(book);
-        System.out.println("Log: Book saved");
+    }
+
+    @Override
+    public void editBook(Long bookId, BookRequest bookRequest) {
+        Book book = this.findById(bookId);
+        book.setName(bookRequest.name);
+        book.setCategory(Category.valueOf(bookRequest.category));
+        book.setAvailableCopies(bookRequest.availableCopies);
+        List<Author> bookAuthors = this.authorService.findByIds(bookRequest.authorIds);
+        book.setAuthors(bookAuthors);
+        this.bookRepository.save(book);
+    }
+
+    @Override
+    public void deleteBook(Long bookId) {
+        Book book = this.findById(bookId);
+        this.bookRepository.delete(book);
     }
 }
