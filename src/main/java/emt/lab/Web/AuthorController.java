@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/author")
+@RequestMapping("/api/authors")
 public class AuthorController {
     private final AuthorService authorService;
 
@@ -19,12 +19,12 @@ public class AuthorController {
     }
 
     @GetMapping("/all")
-    public List<Author> getAllAuthors(){
+    public List<Author> getAllAuthors() {
         return this.authorService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Author getAuthorById(@PathVariable Long id){
+    public Author getAuthorById(@PathVariable Long id) {
         return this.authorService.findById(id);
     }
 }
